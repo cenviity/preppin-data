@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "preppin-data"
+version = "0.1.0"
+description = "My solutions to the Preppin' Data challenges"
+authors = ["Vincent Ging Ho Yim <cenviity@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.0"
+jupyter = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
