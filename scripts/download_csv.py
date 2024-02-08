@@ -4,7 +4,7 @@ from gdown import download
 
 
 def download_csv(url, /, year, week, dry_run=False):
-    filename = f"{year}/{week:02}/input/{year}_{week:02}_test.csv"
+    filename = f"{year}/{week:02}/input/{year}_{week:02}.csv"
     if dry_run:
         print("Testing success!")
     else:
