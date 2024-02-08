@@ -1,21 +1,9 @@
-import requests
+from gdown import download
 
 
 def download_csv(url, year, week):
-    file_id = url.split("/")[-2]
-    download_url = "https://drive.google.com/uc?id=" + file_id
     filename = f"{year}/{week:02}/input/{year}_{week:02}_test.csv"
-
-    with requests.get(download_url, stream=True) as response:
-        response.raise_for_status()
-
-        # if filename:
-
-        with open(filename, "wb") as file:
-            for chunk in response.iter_content(chunk_size=1024):
-                file.write(chunk)
-
-    print(filename)
+    download(url, filename, fuzzy=True)
 
 
 if __name__ == "__main__":
