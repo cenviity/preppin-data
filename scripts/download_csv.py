@@ -3,7 +3,7 @@ import argparse
 from gdown import download
 
 
-def download_csv(url, /, year, week, category, dry_run):
+def download_csv(url, year, week, category, dry_run):
     filename = f"{year}/{week:02}/{category}/{year}_{week:02}_test.csv"
     if dry_run:
         print("Testing success!")
@@ -47,16 +47,5 @@ def parse_arguments():
 
 if __name__ == "__main__":
     args = parse_arguments()
-    url = args.url
-    year = args.year
-    week = args.week
-    category = args.category
-    dry_run = args.dry_run
     # url = "https://drive.google.com/file/d/1STVYZvXzfGMuEq9Yq3yYOmCDCFq4iB0Z/view?usp=share_link"
-    download_csv(
-        url,
-        year=year,
-        week=week,
-        category=category,
-        dry_run=dry_run,
-    )
+    download_csv(**vars(args))
