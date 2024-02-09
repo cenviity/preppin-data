@@ -40,8 +40,11 @@ def parse_arguments():
         required=True,
         help="week of the challenge",
     )
+
     parser.set_defaults(category="input")
-    parser.add_argument(
+    category = parser.add_mutually_exclusive_group()
+
+    category.add_argument(
         "-i",
         "--input",
         dest="category",
@@ -49,7 +52,7 @@ def parse_arguments():
         const="input",
         help="designate as input file",
     )
-    parser.add_argument(
+    category.add_argument(
         "-o",
         "--output",
         dest="category",
