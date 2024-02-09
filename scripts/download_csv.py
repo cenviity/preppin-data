@@ -1,21 +1,20 @@
 import argparse
 import os
 import os.path
+from itertools import chain, zip_longest
 
 from gdown import download
 
 
 def download_csv(url, year, week, category="input", tag="", dry_run=False):
-    target_folder = f"{year}/{week:02}/{category}/"
+    target_folder = f"{year}/{week:02}/data/"
     os.makedirs(target_folder, exist_ok=True)
 
-    if tag:
-        tag = "_" + tag
-
+    target_filename = intersperse(category, tag)
     current_folder = os.getcwd()
 
     if year and week:
-        filename = os.path.join(target_folder, f"{year}_{week:02}{tag}.csv")
+        filename = os.path.join(target_folder, target_filename)
         filepath = os.path.join(current_folder, filename)
     else:
         filename = None  # Default to source filename and save to current folder
@@ -25,6 +24,10 @@ def download_csv(url, year, week, category="input", tag="", dry_run=False):
         print(f"Testing success: {filepath}")
     else:
         download(url, filename, fuzzy=True)
+
+
+def intersperse(*args):
+    return "".join(chain(*zip_longest(args, [], fillvalue="_")))[:-1] + ".csv"
 
 
 def parse_arguments():
