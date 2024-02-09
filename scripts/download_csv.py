@@ -5,14 +5,17 @@ import os.path
 from gdown import download
 
 
-def download_csv(url, year, week, category="input", dry_run=False):
+def download_csv(url, year, week, category="input", tag="", dry_run=False):
     target_folder = f"{year}/{week:02}/{category}/"
     os.makedirs(target_folder, exist_ok=True)
+
+    if tag:
+        tag = "_" + tag
 
     current_folder = os.getcwd()
 
     if year and week:
-        filename = os.path.join(target_folder, f"{year}_{week:02}.csv")
+        filename = os.path.join(target_folder, f"{year}_{week:02}{tag}.csv")
         filepath = os.path.join(current_folder, filename)
     else:
         filename = None  # Default to source filename and save to current folder
@@ -65,6 +68,13 @@ def parse_arguments():
         action="store_const",
         const="output",
         help="designate as output file",
+    )
+
+    parser.add_argument(
+        "-t",
+        "--tag",
+        default="",
+        help="tag to add to end of filename",
     )
 
     args = parser.parse_args()
