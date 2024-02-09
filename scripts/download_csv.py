@@ -7,7 +7,7 @@ from gdown import download
 
 def download_csv(url, year, week, category="input", dry_run=False):
     current_folder = os.getcwd()
-    filename = f"{year}/{week:02}/{category}/{year}_{week:02}_test.csv"
+    filename = f"{year}/{week:02}/{category}/{year}_{week:02}.csv"
     filepath = os.path.join(current_folder, filename)
 
     if dry_run:
