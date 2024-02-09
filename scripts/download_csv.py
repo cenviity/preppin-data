@@ -3,12 +3,12 @@ import argparse
 from gdown import download
 
 
-def download_csv(url, /, year, week, dry_run=False):
-    filename = f"{year}/{week:02}/input/{year}_{week:02}.csv"
+def download_csv(url, /, year, week, category, dry_run):
+    filename = f"{year}/{week:02}/{category}/{year}_{week:02}_test.csv"
     if dry_run:
         print("Testing success!")
     else:
-        download(url, filename, fuzzy=True)
+        download(url, filename, fuzzy=True, format="csv")
 
 
 def parse_arguments():
@@ -35,6 +35,13 @@ def parse_arguments():
         required=True,
         help="week of the challenge",
     )
+    parser.add_argument(
+        "-c",
+        "--category",
+        choices=["input", "i", "output", "o"],
+        default="input",
+        help="input or output file",
+    )
     return parser.parse_args()
 
 
@@ -43,6 +50,13 @@ if __name__ == "__main__":
     url = args.url
     year = args.year
     week = args.week
+    category = args.category
     dry_run = args.dry_run
     # url = "https://drive.google.com/file/d/1STVYZvXzfGMuEq9Yq3yYOmCDCFq4iB0Z/view?usp=share_link"
-    download_csv(url, year=year, week=week, dry_run=dry_run)
+    download_csv(
+        url,
+        year=year,
+        week=week,
+        category=category,
+        dry_run=dry_run,
+    )
