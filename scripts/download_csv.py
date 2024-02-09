@@ -30,14 +30,12 @@ def parse_arguments():
         "-y",
         "--year",
         type=int,
-        required=True,
         help="year of the challenge",
     )
     parser.add_argument(
         "-w",
         "--week",
         type=int,
-        required=True,
         help="week of the challenge",
     )
 
@@ -60,7 +58,12 @@ def parse_arguments():
         const="output",
         help="designate as output file",
     )
-    return parser.parse_args()
+
+    args = parser.parse_args()
+    if bool(args.year) ^ bool(args.week):
+        parser.error("-y/--year and -w/--week must be supplied together")
+
+    return args
 
 
 if __name__ == "__main__":
