@@ -73,5 +73,4 @@ def parse_arguments():
 
 if __name__ == "__main__":
     args = parse_arguments()
-    # url = "https://drive.google.com/file/d/1STVYZvXzfGMuEq9Yq3yYOmCDCFq4iB0Z/view?usp=share_link"
     download_csv(**vars(args))
