@@ -18,7 +18,7 @@ def download_csv(url, year, week, category="input", dry_run=False):
     if dry_run:
         print(f"Testing success: {filepath}")
     else:
-        download(url, filename, fuzzy=True, format="csv")
+        download(url, filename, fuzzy=True)
 
 
 def parse_arguments():
