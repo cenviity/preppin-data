@@ -1,12 +1,17 @@
 import argparse
+import os
+import os.path
 
 from gdown import download
 
 
 def download_csv(url, year, week, category="input", dry_run=False):
+    current_folder = os.getcwd()
     filename = f"{year}/{week:02}/{category}/{year}_{week:02}_test.csv"
+    filepath = os.path.join(current_folder, filename)
+
     if dry_run:
-        print("Testing success!")
+        print(f"Testing success: {filepath}")
     else:
         download(url, filename, fuzzy=True, format="csv")
 
