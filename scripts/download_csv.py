@@ -12,7 +12,9 @@ def download_csv(
     target_folder = f"{year}/{week:02}/data/"
     os.makedirs(target_folder, exist_ok=True)
 
-    target_filename = intersperse(category, tag) + f".{filetype}"
+    if tag:
+        tag = f"_{tag}"
+    target_filename = f"{category}{tag}.{filetype}"
     current_folder = os.getcwd()
 
     if year and week:
