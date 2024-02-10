@@ -6,11 +6,13 @@ from itertools import chain, zip_longest
 from gdown import download
 
 
-def download_csv(url, year, week, category="input", tag="", dry_run=False):
+def download_csv(
+    url, year, week, category="input", tag="", filetype="csv", dry_run=False
+):
     target_folder = f"{year}/{week:02}/data/"
     os.makedirs(target_folder, exist_ok=True)
 
-    target_filename = intersperse(category, tag)
+    target_filename = intersperse(category, tag) + f".{filetype}"
     current_folder = os.getcwd()
 
     if year and week:
@@ -18,7 +20,7 @@ def download_csv(url, year, week, category="input", tag="", dry_run=False):
         filepath = os.path.join(current_folder, filename)
     else:
         filename = None  # Default to source filename and save to current folder
-        filepath = os.path.join(current_folder, "<filename>.csv")
+        filepath = os.path.join(current_folder, f"<filename>.{filetype}")
 
     if dry_run:
         print(f"Testing success: {filepath}")
@@ -27,7 +29,7 @@ def download_csv(url, year, week, category="input", tag="", dry_run=False):
 
 
 def intersperse(*args):
-    return "".join(chain(*zip_longest(args, [], fillvalue="_")))[:-1] + ".csv"
+    return "".join(chain(*zip_longest(args, [], fillvalue="_")))[:-1]
 
 
 def parse_arguments():
@@ -78,6 +80,12 @@ def parse_arguments():
         "--tag",
         default="",
         help="tag to add to end of filename",
+    )
+    parser.add_argument(
+        "-e",
+        "--filetype",
+        default="csv",
+        help="file type or extension",
     )
 
     args = parser.parse_args()
