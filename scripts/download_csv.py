@@ -1,9 +1,9 @@
 import argparse
+import itertools as it
 import os
 import os.path
-from itertools import chain, zip_longest
 
-from gdown import download
+import gdown
 
 
 def download_csv(
@@ -27,11 +27,11 @@ def download_csv(
     if dry_run:
         print(f"Testing success: {filepath}")
     else:
-        download(url, filename, fuzzy=True)
+        gdown.download(url, filename, fuzzy=True)
 
 
 def intersperse(*args):
-    return "".join(chain(*zip_longest(args, [], fillvalue="_")))[:-1]
+    return "".join(it.chain(*it.zip_longest(args, [], fillvalue="_")))[:-1]
 
 
 def parse_arguments():
