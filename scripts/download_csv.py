@@ -3,6 +3,9 @@ import itertools as it
 from pathlib import Path
 
 import gdown
+from rich import traceback
+
+traceback.install(show_locals=True)
 
 
 def download_csv(
