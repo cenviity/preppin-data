@@ -17,25 +17,22 @@ def download_csv(
     filetype="csv",
     dry_run=False,
 ):
-    target_folder = Path(year) / f"{week:>02}" / "data"
-    target_folder.mkdir(exist_ok=True, parents=True)
-
     if tag:
         tag = f"_{tag}"
-    target_filename = f"{category}{tag}.{filetype}"
-    current_folder = Path.cwd()
 
     if year and week:
-        filename = target_folder / target_filename
-        filepath = current_folder / filename
+        target_folder: Path = Path(year) / f"{week:>02}" / "data"
+        target_filename = f"{category}{tag}.{filetype}"
+        if not dry_run:
+            target_folder.mkdir(exist_ok=True, parents=True)
+        filepath: Path = Path.cwd() / target_folder / target_filename
     else:
-        filename = None  # Default to source filename and save to current folder
-        filepath = current_folder / f"<filename>.{filetype}"
+        filepath = Path.cwd() / f"<filename>{tag}.{filetype}"
 
     if dry_run:
         print(f"Testing success: {filepath}")
     else:
-        gdown.download(url, filename, fuzzy=True)
+        gdown.download(url, str(filepath), fuzzy=True)
 
 
 def intersperse(*args):
