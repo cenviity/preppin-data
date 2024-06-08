@@ -52,13 +52,11 @@ def parse_arguments():
     parser.add_argument(
         "-y",
         "--year",
-        type=int,
         help="year of the challenge",
     )
     parser.add_argument(
         "-w",
         "--week",
-        type=int,
         help="week of the challenge",
     )
 
