@@ -14,7 +14,7 @@ def download_csv(
     filetype="csv",
     dry_run=False,
 ):
-    target_folder = Path(year) / f"{week:02}" / "data"
+    target_folder = Path(year) / f"{week:>02}" / "data"
     target_folder.mkdir(exist_ok=True, parents=True)
 
     if tag:
