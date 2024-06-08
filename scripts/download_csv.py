@@ -1,28 +1,33 @@
 import argparse
 import itertools as it
-import os
-import os.path
+from pathlib import Path
 
 import gdown
 
 
 def download_csv(
-    url, year, week, category="input", tag="", filetype="csv", dry_run=False
+    url,
+    year,
+    week,
+    category="input",
+    tag="",
+    filetype="csv",
+    dry_run=False,
 ):
-    target_folder = f"{year}/{week:02}/data/"
-    os.makedirs(target_folder, exist_ok=True)
+    target_folder = Path(year) / f"{week:02}" / "data"
+    target_folder.mkdir(exist_ok=True, parents=True)
 
     if tag:
         tag = f"_{tag}"
     target_filename = f"{category}{tag}.{filetype}"
-    current_folder = os.getcwd()
+    current_folder = Path.cwd()
 
     if year and week:
-        filename = os.path.join(target_folder, target_filename)
-        filepath = os.path.join(current_folder, filename)
+        filename = target_folder / target_filename
+        filepath = current_folder / filename
     else:
         filename = None  # Default to source filename and save to current folder
-        filepath = os.path.join(current_folder, f"<filename>.{filetype}")
+        filepath = current_folder / f"<filename>.{filetype}"
 
     if dry_run:
         print(f"Testing success: {filepath}")
