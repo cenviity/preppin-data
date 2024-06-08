@@ -3,6 +3,7 @@ import itertools as it
 from pathlib import Path
 
 import gdown
+from loguru import logger
 from rich import traceback
 
 traceback.install(show_locals=True)
@@ -30,7 +31,7 @@ def download_csv(
         filepath = Path.cwd() / f"<filename>{tag}.{filetype}"
 
     if dry_run:
-        print(f"Testing success: {filepath}")
+        logger.success(f"Filepath: {filepath}")
     else:
         gdown.download(url, str(filepath), fuzzy=True)
 
