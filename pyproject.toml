@@ -40,7 +40,7 @@ ignore = [
     "W191",
 ]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
 [build-system]
