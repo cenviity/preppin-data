@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "My solutions to the Preppin' Data challenges"
 authors = ["Vincent Ging Ho Yim <cenviity@gmail.com>"]
 readme = "README.md"
+packages = [{ include = "preppin_data", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
