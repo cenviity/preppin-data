@@ -4,6 +4,7 @@
 """
 
 import pandas as pd
+import pandas.testing as pdt
 
 pd.options.mode.copy_on_write = True
 
@@ -58,8 +59,6 @@ flow_card_yes = flow_card_groups.get_group("Yes").reset_index(drop=True)
 flow_card_no = flow_card_groups.get_group("No").reset_index(drop=True)
 
 # Tests
-import pandas.testing as pdt
-
 expected_flow_card_yes = pd.read_csv(
     "data/output_flow_card_yes.csv", parse_dates=["Date"], date_format="%d/%m/%Y"
 )
